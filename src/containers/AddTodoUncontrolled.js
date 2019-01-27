@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-
-const defaultState = {
-  text: '',
-  comments: ''
-}
+import { connect } from 'react-redux'
+import { addTodo } from '../actions'
 
 class AddTodo extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      someField: 'initial state'
-    }
+
     this.handleSubmit = this.handleSubmit.bind(this)
     this.reset = this.reset.bind(this)
   }
@@ -26,8 +21,7 @@ class AddTodo extends Component {
       text: this.text.value,
       comments: this.comments.value
     }
-    this.setState({someField: 'handling submit'})
-    this.props.OnSubmitTodo(newTodo)
+    this.props.dispatch(addTodo(newTodo))
     this.reset()
   }
 
@@ -60,4 +54,4 @@ class AddTodo extends Component {
   }
 }
 
-export default AddTodo
+export default connect()(AddTodo)
